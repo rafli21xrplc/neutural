@@ -3,7 +3,7 @@
     <section class="bg-white dark:bg-gray-900 m-5 sm:p-5 shadow-md sm:rounded-lg overflow-hidden">
         <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Add a new wisata</h2>
-            <form action="/Homepage" method="POST">
+            <form action="/HomepageUpdated/{{ $datas->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                     <div class="sm:col-span-2">
@@ -26,10 +26,12 @@
                         <select id="category" name="category"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             <option selected="">Select category</option>
-                            <option value="mount">mount</option>
-                            <option value="candi">candi</option>
-                            <option value="waterfall">waterfall</option>
-                            {{-- <option value="PH">Phones</option> --}}
+                            @foreach ($datasCategory as $item)
+                                @if (old('category', $datas->category) === $item->category)
+                                <option selected value="{{ $item->id }}">{{ $item->category }}</option>
+                                @endif
+                                <option value="{{ $item->id }}">{{ $item->category }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="sm:col-span-2">

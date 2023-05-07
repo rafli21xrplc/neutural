@@ -24,8 +24,10 @@ class adminController extends Controller
     {
         return Response()->view('Admin.UpdatedWisata', [
             "title" => "Updated",
-            "datas" => wisata::find($id)
+            "datas" => wisata::find($id),
+            "datasCategory" => category::all()
         ]);
+        // dd($id);
     }
 
     protected function deleted($id): RedirectResponse
@@ -33,6 +35,4 @@ class adminController extends Controller
         wisata::destroy($id);
         return response()->redirectTo('/Dashboard');
     }
-
-    // protected function /
 }

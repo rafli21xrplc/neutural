@@ -31,6 +31,15 @@ class WisataController extends Controller
         //     $body = $request->input('body'),
         // ];
 
+        // $imageName = time() . '.' . $request->image->extension();
+        // $path = $request->file('image')->storePubliclyAs(
+        //     'images',
+        //     $imageName,
+        //     'public'
+        // );
+
+        // $path = $request->file('image')->store('images');
+
         $validate = $request->validate([
             'name' => 'required',
             'category' => 'required',
@@ -39,9 +48,12 @@ class WisataController extends Controller
             'deskripsi' => 'required',
             'body' => 'required',
         ]);
+
+        if ($request->file('image')) {
+            $validate['image'] = $request->file('image')->store('images');
+        }
         $validate["slug"] = Str::slug($request->input('name'), '-');
         wisata::create($validate);
-        // dd($validate);
 
         return response()->redirectTo('/Dashboard');
     }
@@ -52,5 +64,27 @@ class WisataController extends Controller
             "title" => "Detail",
             "datas" => wisata::find($id)
         ]);
+    }
+
+    protected function storeUpdated(Request $request, int $id)
+    {
+        $validate = $request->validate([
+            'name' => 'required',
+            'category' => 'required',
+            'writer' => 'required',
+            'image' => 'required',
+            'deskripsi' => 'required',
+            'body' => 'required',
+        ]);
+
+        if ($request->file('image')) {
+            $validate['image'] = $request->file('image')->store('images');
+        }
+
+        // if ($validate['slug'] !== )
+        // $validate["slug"] = Str::slug($request->input('name'), '-');
+        wisata::where('id', $id)->update($validate);
+
+        return response()->redirectTo('/Dashboard');
     }
 }

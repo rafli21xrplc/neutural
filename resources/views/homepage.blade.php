@@ -1,5 +1,4 @@
 @extends('TemplateNavBar')
-
 @section('content')
     <div class="">
         <section class="bg-white lg:px-32 px-4 mx-auto dark:bg-gray-900">
@@ -178,7 +177,7 @@
                         <article class=" bg-white dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-1">
                             <div
                                 class="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                                <img src="https://images.unsplash.com/photo-1602154663343-89fe0bf541ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1031&q=80"
+                                <img src="{{ asset('storage/' . $data->image) }}"
                                     alt="Front of men&#039;s Basic Tee in black."
                                     class="h-full w-full object-cover    object-center lg:h-full lg:w-full hover:grow hover:shadow-lg">
                             </div>
@@ -198,6 +197,7 @@
                                 </div>
                             </div>
                         </article>
+                        {{-- @dd($data) --}}
                     @endforeach
                 </div>
             </div>

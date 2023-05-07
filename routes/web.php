@@ -37,6 +37,7 @@ Route::controller(loginController::class)->group(function () {
 Route::controller(WisataController::class)->group(function () {
     Route::get('/Homepage', 'index')->name('homepage');
     Route::post('/Homepage', 'store');
+    Route::post('/HomepageUpdated/{id}', 'storeUpdated');
     Route::get('/detail/{id}', 'detail');
 })->middleware('auth');
 
